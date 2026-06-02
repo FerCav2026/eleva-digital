@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleva Digital — Sites para Restaurantes e Pizzarias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #0a0a0a;
+            --card: #141414;
+            --border: #252525;
+            --orange: #ff6b2b;
+            --white: #ffffff;
+            --gray: #999999;
+            --green: #25D366;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        header {
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span { color: var(--orange); }
+
+        .header-cta {
+            background: var(--green);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        /* HERO */
+        .hero {
+            padding: 64px 24px 52px;
+            text-align: center;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,107,43,0.12);
+            border: 1px solid rgba(255,107,43,0.3);
+            color: var(--orange);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 5px 14px;
+            border-radius: 100px;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 8vw, 3rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            margin-bottom: 16px;
+        }
+
+        h1 span { color: var(--orange); }
+
+        .hero-sub {
+            color: var(--gray);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .hero-price {
+            font-size: 1rem;
+            color: var(--white);
+            margin-bottom: 28px;
+            font-weight: 500;
+        }
+
+        .hero-price strong {
+            color: var(--orange);
+            font-size: 1.5rem;
+            font-weight: 900;
+        }
+
+        .btn-wa {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--green);
+            color: white;
+            padding: 16px 30px;
+            border-radius: 100px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 8px 32px rgba(37,211,102,0.3);
+        }
+
+        .btn-wa:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 40px rgba(37,211,102,0.4);
+        }
+
+        .btn-wa svg { width: 20px; height: 20px; fill: white; flex-shrink: 0; }
+
+        /* TIPOS */
+        .tipos {
+            padding: 14px 24px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: var(--card);
+        }
+
+        .tipos p { color: var(--gray); font-size: 0.78rem; letter-spacing: 0.3px; }
+        .tipos strong { color: var(--white); }
+
+        /* SECTION TITLE */
+        .section-title {
+            text-align: center;
+            padding: 56px 24px 28px;
+        }
+
+        .section-title h2 {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+
+        .section-title p { color: var(--gray); font-size: 0.9rem; }
+
+        /* MOCKUPS */
+        .mockups-wrap {
+            padding: 0 16px 48px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .mockups-wrap::-webkit-scrollbar { display: none; }
+
+        .mockups-row {
+            display: flex;
+            gap: 16px;
+            width: max-content;
+            padding: 8px;
+        }
+
+        .mockup-card {
+            width: 210px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            flex-shrink: 0;
+            background: var(--card);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+            transition: transform 0.2s;
+        }
+
+        .mockup-card:hover { transform: translateY(-4px); }
+
+        .browser-bar {
+            background: #1c1c1c;
+            padding: 7px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .browser-dots { display: flex; gap: 4px; }
+        .browser-dots span { width: 7px; height: 7px; border-radius: 50%; display: block; }
+        .d1 { background: #ff5f57; }
+        .d2 { background: #febc2e; }
+        .d3 { background: #28c840; }
+
+        .browser-url {
+            flex: 1;
+            background: #2a2a2a;
+            border-radius: 4px;
+            padding: 3px 8px;
+            font-size: 0.58rem;
+            color: #777;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .mock-hero {
+            height: 88px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+        }
+
+        .mock-emoji { font-size: 1.6rem; line-height: 1; margin-bottom: 4px; }
+        .mock-name { font-size: 0.68rem; font-weight: 800; color: white; letter-spacing: 0.3px; }
+        .mock-sub { font-size: 0.52rem; color: rgba(255,255,255,0.65); margin-top: 2px; }
+
+        .mock-nav {
+            background: white;
+            padding: 6px 10px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .mock-nav span { font-size: 0.5rem; color: #444; font-weight: 600; }
+
+        .mock-menu {
+            background: #f7f7f7;
+            padding: 8px 10px;
+        }
+
+        .mock-menu-title {
+            font-size: 0.52rem;
+            font-weight: 800;
+            color: #111;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .mock-items { display: flex; flex-direction: column; gap: 4px; }
+
+        .mock-item {
+            background: white;
+            border-radius: 4px;
+            padding: 5px 7px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mock-item-name { font-size: 0.5rem; color: #222; font-weight: 600; }
+        .mock-item-price { font-size: 0.5rem; font-weight: 700; }
+
+        .mock-footer { padding: 8px 10px; background: white; }
+
+        .mock-btn {
+            width: 100%;
+            padding: 6px;
+            border-radius: 6px;
+            font-size: 0.52rem;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+        }
+
+        .mock-label {
+            text-align: center;
+            padding: 10px 8px;
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: var(--gray);
+            border-top: 1px solid var(--border);
+        }
+
+        /* INCLUDES */
+        .includes {
+            padding: 0 20px 56px;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .includes-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .include-item {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 16px;
+        }
+
+        .include-icon { font-size: 1.4rem; margin-bottom: 8px; }
+        .include-text { font-size: 0.85rem; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+        .include-sub { font-size: 0.75rem; color: var(--gray); line-height: 1.4; }
+
+        /* PRICE */
+        .price-section {
+            background: var(--card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 60px 24px;
+            text-align: center;
+        }
+
+        .price-from { color: var(--gray); font-size: 0.9rem; margin-bottom: 4px; }
+
+        .price-value {
+            font-size: clamp(3rem, 12vw, 5rem);
+            font-weight: 900;
+            letter-spacing: -2px;
+            color: var(--orange);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .price-note { color: var(--gray); font-size: 0.8rem; margin-bottom: 36px; }
+
+        .price-list {
+            list-style: none;
+            text-align: left;
+            display: inline-flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 36px;
+        }
+
+        .price-list li {
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--white);
+        }
+
+        .price-list li::before {
+            content: '✓';
+            color: var(--orange);
+            font-weight: 900;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        /* FINAL CTA */
+        .final-cta {
+            padding: 60px 24px;
+            text-align: center;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        .final-cta h2 {
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+
+        .final-cta p { color: var(--gray); font-size: 0.95rem; margin-bottom: 32px; line-height: 1.6; }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 20px 24px;
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.78rem;
+        }
+
+        @media (min-width: 768px) {
+            .mockups-wrap { overflow-x: visible; }
+            .mockups-row { width: auto; justify-content: center; flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">Eleva<span>Digital</span></div>
+        <a href="https://wa.me/5511947368068?text=Ol%C3%A1!%20Vi%20o%20portfolio%20da%20Eleva%20Digital%20e%20quero%20saber%20mais%20sobre%20o%20site%20para%20o%20meu%20restaurante." class="header-cta">Fale comigo</a>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="badge">Sites para Food Service</div>
+        <h1>Seu restaurante merece um site <span>que vende</span></h1>
+        <p class="hero-sub">Cardapio online, galeria de fotos e botao de pedido — tudo pronto para o celular do seu cliente.</p>
+        <p class="hero-price">A partir de <strong>R$ 497,00</strong></p>
+        <a href="https://wa.me/5511947368068?text=Ol%C3%A1!%20Vi%20o%20portfolio%20da%20Eleva%20Digital%20e%20quero%20saber%20mais%20sobre%20o%20site%20para%20o%20meu%20restaurante." class="btn-wa">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Quero meu site agora
+        </a>
+    </section>
+
+    <!-- TIPOS -->
+    <div class="tipos">
+        <p><strong>Feito para:</strong> Pizzarias &middot; Restaurantes &middot; Hamburguerias &middot; Lanchonetes &middot; Cafeterias</p>
+    </div>
+
+    <!-- MOCKUPS -->
+    <div class="section-title">
+        <h2>Como fica na pratica</h2>
+        <p>Exemplos de sites para diferentes tipos de negocio</p>
+    </div>
+
+    <div class="mockups-wrap">
+        <div class="mockups-row">
+
+            <!-- Pizzaria -->
+            <div class="mockup-card">
+                <div class="browser-bar">
+                    <div class="browser-dots"><span class="d1"></span><span class="d2"></span><span class="d3"></span></div>
+                    <div class="browser-url">pizzariadonmarco.com.br</div>
+                </div>
+                <div class="mock-hero" style="background:linear-gradient(135deg,#c0392b,#e74c3c)">
+                    <div class="mock-emoji">🍕</div>
+                    <div class="mock-name">Pizzaria Don Marco</div>
+                    <div class="mock-sub">Desde 1998 · Forno a lenha</div>
+                </div>
+                <div class="mock-nav">
+                    <span>Cardapio</span><span>Galeria</span><span>Contato</span>
+                </div>
+                <div class="mock-menu">
+                    <div class="mock-menu-title">Nossas Pizzas</div>
+                    <div class="mock-items">
+                        <div class="mock-item"><span class="mock-item-name">Margherita</span><span class="mock-item-price" style="color:#c0392b">R$42</span></div>
+                        <div class="mock-item"><span class="mock-item-name">Calabresa</span><span class="mock-item-price" style="color:#c0392b">R$44</span></div>
+                        <div class="mock-item"><span class="mock-item-name">4 Queijos</span><span class="mock-item-price" style="color:#c0392b">R$48</span></div>
+                    </div>
+                </div>
+                <div class="mock-footer">
+                    <div class="mock-btn" style="background:#25D366">Pedir pelo WhatsApp</div>
+                </div>
+                <div class="mock-label">Pizzaria</div>
+            </div>
+
+            <!-- Hamburgueria -->
+            <div class="mockup-card">
+                <div class="browser-bar">
+                    <div class="browser-dots"><span class="d1"></span><span class="d2"></span><span class="d3"></span></div>
+                    <div class="browser-url">burgerhouse.com.br</div>
+                </div>
+                <div class="mock-hero" style="background:linear-gradient(135deg,#1a1a1a,#3d2b1f)">
+                    <div class="mock-emoji">🍔</div>
+                    <div class="mock-name">Burger House</div>
+                    <div class="mock-sub">Smash burgers artesanais</div>
+                </div>
+                <div class="mock-nav">
+                    <span>Burgers</span><span>Combos</span><span>Sobre</span>
+                </div>
+                <div class="mock-menu">
+                    <div class="mock-menu-title">Smash Burgers</div>
+                    <div class="mock-items">
+                        <div class="mock-item"><span class="mock-item-name">Classic</span><span class="mock-item-price" style="color:#e67e22">R$29</span></div>
+                        <div class="mock-item"><span class="mock-item-name">Double</span><span class="mock-item-price" style="color:#e67e22">R$38</span></div>
+                        <div class="mock-item"><span class="mock-item-name">Bacon BBQ</span><span class="mock-item-price" style="color:#e67e22">R$42</span></div>
+                    </div>
+                </div>
+                <div class="mock-footer">
+                    <div class="mock-btn" style="background:#e67e22">Ver Cardapio Completo</div>
+                </div>
+                <div class="mock-label">Hamburgueria</div>
+            </div>
+
+            <!-- Restaurante -->
+            <div class="mockup-card">
+                <div class="browser-bar">
+                    <div class="browser-dots"><span class="d1"></span><span class="d2"></span><span class="d3"></span></div>
+                    <div class="browser-url">sabordaterra.com.br</div>
+                </div>
+                <div class="mock-hero" style="background:linear-gradient(135deg,#1e5631,#27ae60)">
+                    <div class="mock-emoji">🍽️</div>
+                    <div class="mock-name">Sabor da Terra</div>
+                    <div class="mock-sub">Comida caseira · Almoco e jantar</div>
+                </div>
+                <div class="mock-nav">
+                    <span>Cardapio</span><span>Reservas</span><span>Local</span>
+                </div>
+                <div class="mock-menu">
+                    <div class="mock-menu-title">Prato do Dia</div>
+                    <div class="mock-items">
+                        <div class="mock-item"><span class="mock-item-name">Frango Assado</span><span class="mock-item-price" style="color:#27ae60">R$35</span></div>
+                        <div class="mock-item"><span class="mock-item-name">Picanha Grelhada</span><span class="mock-item-price" style="color:#27ae60">R$52</span></div>
+                        <div class="mock-item"><span class="mock-item-name">Moqueca de Peixe</span><span class="mock-item-price" style="color:#27ae60">R$48</span></div>
+                    </div>
+                </div>
+                <div class="mock-footer">
+                    <div class="mock-btn" style="background:#27ae60">Fazer Reserva</div>
+                </div>
+                <div class="mock-label">Restaurante</div>
+            </div>
+
+            <!-- Lanchonete -->
+            <div class="mockup-card">
+                <div class="browser-bar">
+                    <div class="browser-dots"><span class="d1"></span><span class="d2"></span><span class="d3"></span></div>
+                    <div class="browser-url">lanchecentral.com.br</div>
+                </div>
+                <div class="mock-hero" style="background:linear-gradient(135deg,#b7470a,#f39c12)">
+                    <div class="mock-emoji">🥪</div>
+                    <div class="mock-name">Lanche Central</div>
+                    <div class="mock-sub">Aberto das 7h as 22h</div>
+                </div>
+                <div class="mock-nav">
+                    <span>Lanches</span><span>Sucos</span><span>Combos</span>
+                </div>
+                <div class="mock-menu">
+                    <div class="mock-menu-title">Destaques</div>
+                    <div class="mock-items">
+                        <div class="mock-item"><span class="mock-item-name">X-Salada</span><span class="mock-item-price" style="color:#e67e22">R$18</span></div>
+                        <div class="mock-item"><span class="mock-item-name">Misto Quente</span><span class="mock-item-price" style="color:#e67e22">R$12</span></div>
+                        <div class="mock-item"><span class="mock-item-name">Acai 500ml</span><span class="mock-item-price" style="color:#e67e22">R$22</span></div>
+                    </div>
+                </div>
+                <div class="mock-footer">
+                    <div class="mock-btn" style="background:#f39c12">Pedir Agora</div>
+                </div>
+                <div class="mock-label">Lanchonete</div>
+            </div>
+
+            <!-- Cafeteria -->
+            <div class="mockup-card">
+                <div class="browser-bar">
+                    <div class="browser-dots"><span class="d1"></span><span class="d2"></span><span class="d3"></span></div>
+                    <div class="browser-url">cafearoma.com.br</div>
+                </div>
+                <div class="mock-hero" style="background:linear-gradient(135deg,#3b1f0a,#7b5c3e)">
+                    <div class="mock-emoji">☕</div>
+                    <div class="mock-name">Cafe Aroma</div>
+                    <div class="mock-sub">Graos especiais · desde 2015</div>
+                </div>
+                <div class="mock-nav">
+                    <span>Bebidas</span><span>Doces</span><span>Reservar</span>
+                </div>
+                <div class="mock-menu">
+                    <div class="mock-menu-title">Cafes Especiais</div>
+                    <div class="mock-items">
+                        <div class="mock-item"><span class="mock-item-name">Espresso</span><span class="mock-item-price" style="color:#7b5c3e">R$7</span></div>
+                        <div class="mock-item"><span class="mock-item-name">Cappuccino</span><span class="mock-item-price" style="color:#7b5c3e">R$14</span></div>
+                        <div class="mock-item"><span class="mock-item-name">Cold Brew</span><span class="mock-item-price" style="color:#7b5c3e">R$16</span></div>
+                    </div>
+                </div>
+                <div class="mock-footer">
+                    <div class="mock-btn" style="background:#7b5c3e">Ver Cardapio</div>
+                </div>
+                <div class="mock-label">Cafeteria</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- INCLUDES -->
+    <div class="section-title">
+        <h2>O que esta incluso</h2>
+        <p>Tudo que seu negocio precisa para aparecer online</p>
+    </div>
+
+    <div class="includes">
+        <div class="includes-grid">
+            <div class="include-item">
+                <div class="include-icon">📋</div>
+                <div class="include-text">Cardapio Online</div>
+                <div class="include-sub">Seus pratos com foto e preco, sempre atualizado</div>
+            </div>
+            <div class="include-item">
+                <div class="include-icon">📸</div>
+                <div class="include-text">Galeria de Fotos</div>
+                <div class="include-sub">Mostre o ambiente e os pratos em alta qualidade</div>
+            </div>
+            <div class="include-item">
+                <div class="include-icon">💬</div>
+                <div class="include-text">Botao de Pedido</div>
+                <div class="include-sub">Abre direto no WhatsApp para fechar o pedido</div>
+            </div>
+            <div class="include-item">
+                <div class="include-icon">📍</div>
+                <div class="include-text">Mapa e Endereco</div>
+                <div class="include-sub">Cliente te encontra facil no Google Maps</div>
+            </div>
+            <div class="include-item">
+                <div class="include-icon">📱</div>
+                <div class="include-text">100% no Celular</div>
+                <div class="include-sub">Funciona perfeitamente no smartphone do cliente</div>
+            </div>
+            <div class="include-item">
+                <div class="include-icon">🚀</div>
+                <div class="include-text">Entrega Rapida</div>
+                <div class="include-sub">Seu site pronto em ate 7 dias uteis</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRICE -->
+    <div class="price-section">
+        <p class="price-from">A partir de</p>
+        <div class="price-value">R$ 497</div>
+        <p class="price-note">Valor unico &middot; Sem mensalidade</p>
+        <ul class="price-list">
+            <li>Site completo com cardapio</li>
+            <li>Galeria de fotos dos pratos</li>
+            <li>Botao de pedido via WhatsApp</li>
+            <li>Mapa e informacoes de contato</li>
+            <li>Adaptado para celular</li>
+            <li>Entrega em ate 7 dias uteis</li>
+        </ul>
+        <a href="https://wa.me/5511947368068?text=Ol%C3%A1!%20Vi%20o%20portfolio%20da%20Eleva%20Digital%20e%20quero%20saber%20mais%20sobre%20o%20site%20para%20o%20meu%20restaurante." class="btn-wa">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Falar com a Fernanda
+        </a>
+    </div>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+        <h2>Pronto para ter seu site?</h2>
+        <p>Me manda uma mensagem agora e te conto como funciona. Sem compromisso.</p>
+        <a href="https://wa.me/5511947368068?text=Ol%C3%A1!%20Vi%20o%20portfolio%20da%20Eleva%20Digital%20e%20quero%20saber%20mais%20sobre%20o%20site%20para%20o%20meu%20restaurante." class="btn-wa">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Quero meu site agora
+        </a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Eleva Digital &copy; 2026 &mdash; Sites para restaurantes e food service</p>
+    </footer>
+
+</body>
+</html>
