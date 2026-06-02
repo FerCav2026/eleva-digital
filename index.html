@@ -35,17 +35,12 @@
             border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
-            background: rgba(10,10,10,0.95);
-            backdrop-filter: blur(8px);
+            background: rgba(10,10,10,0.96);
+            backdrop-filter: blur(10px);
             z-index: 100;
         }
 
-        .logo {
-            font-size: 1.25rem;
-            font-weight: 900;
-            letter-spacing: -0.5px;
-        }
-
+        .logo { font-size: 1.25rem; font-weight: 900; letter-spacing: -0.5px; }
         .logo span { color: var(--orange); }
 
         .header-cta {
@@ -159,132 +154,148 @@
 
         .section-title p { color: var(--gray); font-size: 0.9rem; }
 
-        /* MOCKUPS */
-        .mockups-wrap {
-            padding: 0 16px 48px;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-        }
-
-        .mockups-wrap::-webkit-scrollbar { display: none; }
-
-        .mockups-row {
-            display: flex;
-            gap: 16px;
-            width: max-content;
-            padding: 8px;
-        }
-
-        .mockup-card {
-            width: 210px;
-            border-radius: 12px;
+        /* CAROUSEL */
+        .carousel-wrapper {
+            position: relative;
             overflow: hidden;
-            border: 1px solid var(--border);
-            flex-shrink: 0;
-            background: var(--card);
-            box-shadow: 0 16px 48px rgba(0,0,0,0.5);
-            transition: transform 0.2s;
+            background: #000;
+            height: 300px;
         }
 
-        .mockup-card:hover { transform: translateY(-4px); }
+        @media (min-width: 600px) {
+            .carousel-wrapper { height: 420px; }
+        }
 
-        .browser-bar {
-            background: #1c1c1c;
-            padding: 7px 10px;
+        @media (min-width: 900px) {
+            .carousel-wrapper { height: 540px; }
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.7s ease;
+            pointer-events: none;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(0,0,0,0.85) 0%,
+                rgba(0,0,0,0.3) 40%,
+                rgba(0,0,0,0.05) 100%
+            );
+        }
+
+        .slide-info {
+            position: absolute;
+            bottom: 56px;
+            left: 24px;
+            right: 24px;
+        }
+
+        @media (min-width: 600px) {
+            .slide-info { bottom: 72px; left: 40px; }
+        }
+
+        .slide-tipo {
+            display: inline-block;
+            background: var(--orange);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 100px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .slide-nome {
+            font-size: clamp(1.3rem, 5vw, 2rem);
+            font-weight: 900;
+            color: white;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+        }
+
+        .slide-sub {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.75);
+            margin-top: 4px;
+        }
+
+        /* Arrows */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(4px);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             display: flex;
-            align-items: center;
-            gap: 8px;
-            border-bottom: 1px solid #2a2a2a;
-        }
-
-        .browser-dots { display: flex; gap: 4px; }
-        .browser-dots span { width: 7px; height: 7px; border-radius: 50%; display: block; }
-        .d1 { background: #ff5f57; }
-        .d2 { background: #febc2e; }
-        .d3 { background: #28c840; }
-
-        .browser-url {
-            flex: 1;
-            background: #2a2a2a;
-            border-radius: 4px;
-            padding: 3px 8px;
-            font-size: 0.58rem;
-            color: #777;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .mock-hero {
-            height: 88px;
-            display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 12px;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.2s;
+            font-size: 1rem;
+            user-select: none;
         }
 
-        .mock-emoji { font-size: 1.6rem; line-height: 1; margin-bottom: 4px; }
-        .mock-name { font-size: 0.68rem; font-weight: 800; color: white; letter-spacing: 0.3px; }
-        .mock-sub { font-size: 0.52rem; color: rgba(255,255,255,0.65); margin-top: 2px; }
+        .arrow:hover { background: rgba(255,255,255,0.25); }
+        .arrow-prev { left: 12px; }
+        .arrow-next { right: 12px; }
 
-        .mock-nav {
-            background: white;
-            padding: 6px 10px;
+        @media (min-width: 600px) {
+            .arrow { width: 48px; height: 48px; }
+            .arrow-prev { left: 20px; }
+            .arrow-next { right: 20px; }
+        }
+
+        /* Dots */
+        .dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            gap: 8px;
+            gap: 6px;
+            z-index: 10;
         }
 
-        .mock-nav span { font-size: 0.5rem; color: #444; font-weight: 600; }
-
-        .mock-menu {
-            background: #f7f7f7;
-            padding: 8px 10px;
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.35);
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
         }
 
-        .mock-menu-title {
-            font-size: 0.52rem;
-            font-weight: 800;
-            color: #111;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .mock-items { display: flex; flex-direction: column; gap: 4px; }
-
-        .mock-item {
+        .dot.active {
             background: white;
-            border-radius: 4px;
-            padding: 5px 7px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .mock-item-name { font-size: 0.5rem; color: #222; font-weight: 600; }
-        .mock-item-price { font-size: 0.5rem; font-weight: 700; }
-
-        .mock-footer { padding: 8px 10px; background: white; }
-
-        .mock-btn {
-            width: 100%;
-            padding: 6px;
-            border-radius: 6px;
-            font-size: 0.52rem;
-            font-weight: 700;
-            color: white;
-            text-align: center;
-        }
-
-        .mock-label {
-            text-align: center;
-            padding: 10px 8px;
-            font-size: 0.68rem;
-            font-weight: 600;
-            color: var(--gray);
-            border-top: 1px solid var(--border);
+            transform: scale(1.3);
         }
 
         /* INCLUDES */
@@ -347,7 +358,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            color: var(--white);
         }
 
         .price-list li::before {
@@ -383,11 +393,6 @@
             color: var(--gray);
             font-size: 0.78rem;
         }
-
-        @media (min-width: 768px) {
-            .mockups-wrap { overflow-x: visible; }
-            .mockups-row { width: auto; justify-content: center; flex-wrap: wrap; }
-        }
     </style>
 </head>
 <body>
@@ -415,156 +420,75 @@
         <p><strong>Feito para:</strong> Pizzarias &middot; Restaurantes &middot; Hamburguerias &middot; Lanchonetes &middot; Cafeterias</p>
     </div>
 
-    <!-- MOCKUPS -->
+    <!-- CAROUSEL -->
     <div class="section-title">
-        <h2>Como fica na pratica</h2>
-        <p>Exemplos de sites para diferentes tipos de negocio</p>
+        <h2>Exemplos de sites criados</h2>
+        <p>Deslize para ver os modelos para cada tipo de negocio</p>
     </div>
 
-    <div class="mockups-wrap">
-        <div class="mockups-row">
+    <div class="carousel-wrapper">
 
-            <!-- Pizzaria -->
-            <div class="mockup-card">
-                <div class="browser-bar">
-                    <div class="browser-dots"><span class="d1"></span><span class="d2"></span><span class="d3"></span></div>
-                    <div class="browser-url">pizzariadonmarco.com.br</div>
-                </div>
-                <div class="mock-hero" style="background:linear-gradient(135deg,#c0392b,#e74c3c)">
-                    <div class="mock-emoji">🍕</div>
-                    <div class="mock-name">Pizzaria Don Marco</div>
-                    <div class="mock-sub">Desde 1998 · Forno a lenha</div>
-                </div>
-                <div class="mock-nav">
-                    <span>Cardapio</span><span>Galeria</span><span>Contato</span>
-                </div>
-                <div class="mock-menu">
-                    <div class="mock-menu-title">Nossas Pizzas</div>
-                    <div class="mock-items">
-                        <div class="mock-item"><span class="mock-item-name">Margherita</span><span class="mock-item-price" style="color:#c0392b">R$42</span></div>
-                        <div class="mock-item"><span class="mock-item-name">Calabresa</span><span class="mock-item-price" style="color:#c0392b">R$44</span></div>
-                        <div class="mock-item"><span class="mock-item-name">4 Queijos</span><span class="mock-item-price" style="color:#c0392b">R$48</span></div>
-                    </div>
-                </div>
-                <div class="mock-footer">
-                    <div class="mock-btn" style="background:#25D366">Pedir pelo WhatsApp</div>
-                </div>
-                <div class="mock-label">Pizzaria</div>
+        <div class="slide active">
+            <img src="images/pizzaria-artesanal.jpg" alt="Site para pizzaria artesanal">
+            <div class="slide-overlay"></div>
+            <div class="slide-info">
+                <span class="slide-tipo">Pizzaria</span>
+                <div class="slide-nome">Don Marco Pizzaria</div>
+                <div class="slide-sub">Forno a lenha · Cardapio online · Pedido via WhatsApp</div>
             </div>
-
-            <!-- Hamburgueria -->
-            <div class="mockup-card">
-                <div class="browser-bar">
-                    <div class="browser-dots"><span class="d1"></span><span class="d2"></span><span class="d3"></span></div>
-                    <div class="browser-url">burgerhouse.com.br</div>
-                </div>
-                <div class="mock-hero" style="background:linear-gradient(135deg,#1a1a1a,#3d2b1f)">
-                    <div class="mock-emoji">🍔</div>
-                    <div class="mock-name">Burger House</div>
-                    <div class="mock-sub">Smash burgers artesanais</div>
-                </div>
-                <div class="mock-nav">
-                    <span>Burgers</span><span>Combos</span><span>Sobre</span>
-                </div>
-                <div class="mock-menu">
-                    <div class="mock-menu-title">Smash Burgers</div>
-                    <div class="mock-items">
-                        <div class="mock-item"><span class="mock-item-name">Classic</span><span class="mock-item-price" style="color:#e67e22">R$29</span></div>
-                        <div class="mock-item"><span class="mock-item-name">Double</span><span class="mock-item-price" style="color:#e67e22">R$38</span></div>
-                        <div class="mock-item"><span class="mock-item-name">Bacon BBQ</span><span class="mock-item-price" style="color:#e67e22">R$42</span></div>
-                    </div>
-                </div>
-                <div class="mock-footer">
-                    <div class="mock-btn" style="background:#e67e22">Ver Cardapio Completo</div>
-                </div>
-                <div class="mock-label">Hamburgueria</div>
-            </div>
-
-            <!-- Restaurante -->
-            <div class="mockup-card">
-                <div class="browser-bar">
-                    <div class="browser-dots"><span class="d1"></span><span class="d2"></span><span class="d3"></span></div>
-                    <div class="browser-url">sabordaterra.com.br</div>
-                </div>
-                <div class="mock-hero" style="background:linear-gradient(135deg,#1e5631,#27ae60)">
-                    <div class="mock-emoji">🍽️</div>
-                    <div class="mock-name">Sabor da Terra</div>
-                    <div class="mock-sub">Comida caseira · Almoco e jantar</div>
-                </div>
-                <div class="mock-nav">
-                    <span>Cardapio</span><span>Reservas</span><span>Local</span>
-                </div>
-                <div class="mock-menu">
-                    <div class="mock-menu-title">Prato do Dia</div>
-                    <div class="mock-items">
-                        <div class="mock-item"><span class="mock-item-name">Frango Assado</span><span class="mock-item-price" style="color:#27ae60">R$35</span></div>
-                        <div class="mock-item"><span class="mock-item-name">Picanha Grelhada</span><span class="mock-item-price" style="color:#27ae60">R$52</span></div>
-                        <div class="mock-item"><span class="mock-item-name">Moqueca de Peixe</span><span class="mock-item-price" style="color:#27ae60">R$48</span></div>
-                    </div>
-                </div>
-                <div class="mock-footer">
-                    <div class="mock-btn" style="background:#27ae60">Fazer Reserva</div>
-                </div>
-                <div class="mock-label">Restaurante</div>
-            </div>
-
-            <!-- Lanchonete -->
-            <div class="mockup-card">
-                <div class="browser-bar">
-                    <div class="browser-dots"><span class="d1"></span><span class="d2"></span><span class="d3"></span></div>
-                    <div class="browser-url">lanchecentral.com.br</div>
-                </div>
-                <div class="mock-hero" style="background:linear-gradient(135deg,#b7470a,#f39c12)">
-                    <div class="mock-emoji">🥪</div>
-                    <div class="mock-name">Lanche Central</div>
-                    <div class="mock-sub">Aberto das 7h as 22h</div>
-                </div>
-                <div class="mock-nav">
-                    <span>Lanches</span><span>Sucos</span><span>Combos</span>
-                </div>
-                <div class="mock-menu">
-                    <div class="mock-menu-title">Destaques</div>
-                    <div class="mock-items">
-                        <div class="mock-item"><span class="mock-item-name">X-Salada</span><span class="mock-item-price" style="color:#e67e22">R$18</span></div>
-                        <div class="mock-item"><span class="mock-item-name">Misto Quente</span><span class="mock-item-price" style="color:#e67e22">R$12</span></div>
-                        <div class="mock-item"><span class="mock-item-name">Acai 500ml</span><span class="mock-item-price" style="color:#e67e22">R$22</span></div>
-                    </div>
-                </div>
-                <div class="mock-footer">
-                    <div class="mock-btn" style="background:#f39c12">Pedir Agora</div>
-                </div>
-                <div class="mock-label">Lanchonete</div>
-            </div>
-
-            <!-- Cafeteria -->
-            <div class="mockup-card">
-                <div class="browser-bar">
-                    <div class="browser-dots"><span class="d1"></span><span class="d2"></span><span class="d3"></span></div>
-                    <div class="browser-url">cafearoma.com.br</div>
-                </div>
-                <div class="mock-hero" style="background:linear-gradient(135deg,#3b1f0a,#7b5c3e)">
-                    <div class="mock-emoji">☕</div>
-                    <div class="mock-name">Cafe Aroma</div>
-                    <div class="mock-sub">Graos especiais · desde 2015</div>
-                </div>
-                <div class="mock-nav">
-                    <span>Bebidas</span><span>Doces</span><span>Reservar</span>
-                </div>
-                <div class="mock-menu">
-                    <div class="mock-menu-title">Cafes Especiais</div>
-                    <div class="mock-items">
-                        <div class="mock-item"><span class="mock-item-name">Espresso</span><span class="mock-item-price" style="color:#7b5c3e">R$7</span></div>
-                        <div class="mock-item"><span class="mock-item-name">Cappuccino</span><span class="mock-item-price" style="color:#7b5c3e">R$14</span></div>
-                        <div class="mock-item"><span class="mock-item-name">Cold Brew</span><span class="mock-item-price" style="color:#7b5c3e">R$16</span></div>
-                    </div>
-                </div>
-                <div class="mock-footer">
-                    <div class="mock-btn" style="background:#7b5c3e">Ver Cardapio</div>
-                </div>
-                <div class="mock-label">Cafeteria</div>
-            </div>
-
         </div>
+
+        <div class="slide">
+            <img src="images/pizzaria-premium.jpg" alt="Site para pizzaria premium">
+            <div class="slide-overlay"></div>
+            <div class="slide-info">
+                <span class="slide-tipo">Pizzaria Premium</span>
+                <div class="slide-nome">Bráz & Cia Pizzaria</div>
+                <div class="slide-sub">Experiencia gourmet · Reservas online · Galeria de pratos</div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <img src="images/hamburgueria.jpg" alt="Site para hamburgueria">
+            <div class="slide-overlay"></div>
+            <div class="slide-info">
+                <span class="slide-tipo">Hamburgueria</span>
+                <div class="slide-nome">Burger House</div>
+                <div class="slide-sub">Smash burgers artesanais · Combos · Delivery</div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <img src="images/restaurante.jpg" alt="Site para restaurante familiar">
+            <div class="slide-overlay"></div>
+            <div class="slide-info">
+                <span class="slide-tipo">Restaurante</span>
+                <div class="slide-nome">Sabor da Terra</div>
+                <div class="slide-sub">Comida caseira · Almoco e jantar · Prato do dia</div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <img src="images/cafeteria.jpg" alt="Site para cafeteria">
+            <div class="slide-overlay"></div>
+            <div class="slide-info">
+                <span class="slide-tipo">Cafeteria</span>
+                <div class="slide-nome">Café Aroma</div>
+                <div class="slide-sub">Graos especiais · Brunch · Reservas</div>
+            </div>
+        </div>
+
+        <button class="arrow arrow-prev" onclick="mover(-1)">&#8592;</button>
+        <button class="arrow arrow-next" onclick="mover(1)">&#8594;</button>
+
+        <div class="dots">
+            <div class="dot active" onclick="irPara(0)"></div>
+            <div class="dot" onclick="irPara(1)"></div>
+            <div class="dot" onclick="irPara(2)"></div>
+            <div class="dot" onclick="irPara(3)"></div>
+            <div class="dot" onclick="irPara(4)"></div>
+        </div>
+
     </div>
 
     <!-- INCLUDES -->
@@ -641,6 +565,49 @@
     <footer>
         <p>Eleva Digital &copy; 2026 &mdash; Sites para restaurantes e food service</p>
     </footer>
+
+    <script>
+        let atual = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        let timer = setInterval(() => mover(1), 4500);
+
+        function irPara(n) {
+            slides[atual].classList.remove('active');
+            dots[atual].classList.remove('active');
+            atual = (n + slides.length) % slides.length;
+            slides[atual].classList.add('active');
+            dots[atual].classList.add('active');
+        }
+
+        function mover(direcao) {
+            irPara(atual + direcao);
+        }
+
+        // Reinicia o timer ao clicar nas setas
+        document.querySelector('.arrow-prev').addEventListener('click', () => {
+            clearInterval(timer);
+            timer = setInterval(() => mover(1), 4500);
+        });
+
+        document.querySelector('.arrow-next').addEventListener('click', () => {
+            clearInterval(timer);
+            timer = setInterval(() => mover(1), 4500);
+        });
+
+        // Suporte a toque (celular)
+        let touchX = 0;
+        const wrapper = document.querySelector('.carousel-wrapper');
+        wrapper.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
+        wrapper.addEventListener('touchend', e => {
+            const diff = touchX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 40) {
+                clearInterval(timer);
+                mover(diff > 0 ? 1 : -1);
+                timer = setInterval(() => mover(1), 4500);
+            }
+        });
+    </script>
 
 </body>
 </html>
